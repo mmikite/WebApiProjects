@@ -46,3 +46,16 @@ div {
 
 .kerdes {
 }
+
+.kattintható:hover {
+	background-color: navy;
+	color: white;
+}
+
+.jo {
+	color: green;
+}
+
+.rossz {
+	color: red;
+}

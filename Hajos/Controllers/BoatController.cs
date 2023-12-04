@@ -9,14 +9,17 @@ namespace Hajos.Controllers
 	public class BoatController : ControllerBase
 	{
 		[HttpGet]
-		[Route("questions/all")]
-		public IActionResult MindegyHogyHivjak()
+		[Route("questions/{sorszám}")]
+		public IActionResult M2(int sorszám)
 		{
 			HajosContext context = new HajosContext();
-			var kerdesek = from x in context.Questions
-						   select x.Question1;
+			var kerdes = (from x in context.Questions
+						where x.QuestionId == sorszám
+						   select x).FirstOrDefault();
+			
+			if (kerdes == null) return BadRequest("Nincs ilyen sorszámú kérdés");
 
-			return Ok(kerdesek);
+			return new JsonResult(kerdes);
 		}
 	}
 }
